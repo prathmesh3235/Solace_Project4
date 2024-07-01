@@ -98,7 +98,9 @@ const MoreinfoPositive = () => {
           />{" "}
         </h2>
         <p style={{ display: openFeaturesUV ? "block" : "none" }}>
-          {product.UV_FilterDescription}
+          The {product.product_name} impresses with the built-in UV protection
+          filter &quot;UV1000&quot; in &quot;very strong&quot;. This guarantees
+          protection against solar radiation up to UV index 10+.
         </p>
         <hr />
 
@@ -113,7 +115,9 @@ const MoreinfoPositive = () => {
           />{" "}
         </h2>
         <p style={{ display: openFeaturesPOL ? "block" : "none" }}>
-          {product.PolarisierungDescription}
+          Polarized sunglasses not only offer protection from harmful UV
+          radiation, they also reduce unpleasant reflections from sunlight. The{" "}
+          {product.product_name} is polarized in this version.
         </p>
         <hr />
         <h2>
@@ -127,11 +131,12 @@ const MoreinfoPositive = () => {
           />{" "}
         </h2>
         <p style={{ display: openFeaturesZU ? "block" : "none" }}>
-          {product.MaterialDescription}
+          The frame of the {product.product_name} is made of high-quality metal,
+          which guarantees durability and robustness.
         </p>
         <hr />
         <h2>
-          {product.Premium_tag}
+          {product.Lenses}
           <AiOutlinePlus
             size={25}
             onClick={() => {
@@ -141,7 +146,10 @@ const MoreinfoPositive = () => {
           />
         </h2>
         <p style={{ display: openFeaturesSEH ? "block" : "none" }}>
-          {product.Premium_description}
+          The {product.product_name} is equipped with high-quality, hard-wearing
+          lenses. We guarantee durability and a high level of protection against
+          scratches. If required, the lenses can be adjusted for prescription at
+          no extra cost.
         </p>
         <hr />
       </div>

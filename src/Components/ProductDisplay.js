@@ -6,6 +6,7 @@ import { Button } from "../styles/Button";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc, arrayUnion } from "@firebase/firestore";
 import { db } from "../services/firebase";
+import product_card from "../data/product_data";
 
 const ProductDisplay = ({ product, userId, mode }) => {
   const navigate = useNavigate();
@@ -42,8 +43,8 @@ const ProductDisplay = ({ product, userId, mode }) => {
         style={{
           display: "flex",
           justifyContent: "space-evenly",
-          marginTop: "50px",
-          marginBottom: "50px",
+          marginTop: "35px",
+          marginBottom: "35px",
         }}
       >
         <div className="display-info">
@@ -56,10 +57,10 @@ const ProductDisplay = ({ product, userId, mode }) => {
             </li>
             <li className="product-info-i">
               <h3>
-                <BsDot />	Color: gold / black{" "}
+                <BsDot />	Color: {product.farbe}{" "}
               </h3>
             </li>
-            <li className="product-info-i">
+            {/* <li className="product-info-i">
               <h3>
                 {" "}
                 <BsDot /> Material: metal{" "}
@@ -82,7 +83,7 @@ const ProductDisplay = ({ product, userId, mode }) => {
                 {" "}
                 <BsDot />	Free shipping and return{" "}
               </h3>
-            </li>
+            </li> */}
             {/* <li className="product-info-i">
         
        <h3><AiOutlineArrowRight/> Extra Feature One </h3>
@@ -97,7 +98,7 @@ const ProductDisplay = ({ product, userId, mode }) => {
                 <a>
                   <Button onClick={handleClick}>
                     {" "}
-                    <AiOutlineArrowRight /> Weitere Eigenschaften{" "}
+                    <AiOutlineArrowRight /> More Information{" "}
                   </Button>
                 </a>{" "}
               </h3>

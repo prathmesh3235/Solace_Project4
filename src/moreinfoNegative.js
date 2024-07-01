@@ -98,7 +98,8 @@ const MoreinfoNegative = () => {
           />{" "}
         </h2>
         <p style={{ display: openFeaturesUV ? "block" : "none" }}>
-          {product.UV_FilterDescription}
+          The {product.product_name} does not have a built-in UV protection
+          filter.
         </p>
         <hr />
 
@@ -113,7 +114,9 @@ const MoreinfoNegative = () => {
           />{" "}
         </h2>
         <p style={{ display: openFeaturesPOL ? "block" : "none" }}>
-          {product.PolarisierungDescription}
+          Polarized sunglasses not only offer protection from harmful UV
+          radiation, they also reduce unpleasant reflections from sunlight. The{" "}
+          {product.product_name} is not polarized in this version.
         </p>
         <hr />
         <h2>
@@ -127,11 +130,11 @@ const MoreinfoNegative = () => {
           />{" "}
         </h2>
         <p style={{ display: openFeaturesZU ? "block" : "none" }}>
-          {product.MaterialDescription}
+          The frame of the {product.product_name}is made of standard plastic.
         </p>
         <hr />
         <h2>
-          {product.Premium_tag}
+          {product.Lenses}
           <AiOutlinePlus
             size={25}
             onClick={() => {
@@ -141,7 +144,9 @@ const MoreinfoNegative = () => {
           />
         </h2>
         <p style={{ display: openFeaturesSEH ? "block" : "none" }}>
-          {product.Premium_description}
+          The [{product.product_name} is equipped with standard lenses. We do
+          not guarantee durability or protection against scratches. Prescription
+          adjustment is not possible.
         </p>
         <hr />
       </div>

@@ -119,10 +119,10 @@ const SingleProduct = () => {
         </div>
 
         <div className="single-product-page">
-          <div className="slider-block">
+          {/* <div className="slider-block">
             {" "}
             <Productpage userId={userId} product={product} mode={mode} />
-          </div>
+          </div> */}
           <div className="prod-disp">
             <ProductDisplay userId={userId} product={product} mode={mode} />
           </div>

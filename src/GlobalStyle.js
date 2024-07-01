@@ -178,7 +178,7 @@ body {
     }    
     .single-product-page{
       display:flex;
-      margin:60px;
+      // margin:60px;
       // width: 100%;
       // height: 500px;
       justify-content: space-around;

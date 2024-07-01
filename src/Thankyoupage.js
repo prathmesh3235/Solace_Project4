@@ -36,7 +36,7 @@ const Thankyoupage = () => {
         <br />{" "}
         <h3 className="tyh3">
           {" "}
-          Now press the “Next arrow” at the bottom of the questionnaire and fill out the remaining questions
+          Please close this website now and return to the survey to finish it.
         </h3>
       </div>
       <Footer />

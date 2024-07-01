@@ -23,7 +23,7 @@ const ProductList = ({ ref, userId }) => {
 
   return (
     <div id="productList" className="productlistHead" ref={ref}>
-      <h4 className="productlistHeadh4"> Select your favorite pair of sunglasses </h4>
+      <h4 className="productlistHeadh4"> Choose Your New Favorite Sunglasses </h4>
       <div className="productlist">{listItems}</div>
     </div>
   );
