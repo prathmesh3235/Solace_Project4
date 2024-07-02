@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import product_card from "../data/product_data"
 const Model3D = ({ product, mode}) => {
   const [section, setSection] = useState(3);
   let imageUrl
   
   if (mode=='3') {
-    imageUrl = "images/3dproduct1" + "." + section + ".png";
+    console.log("Plcbnslfblv",product_card[product - 1].male1.split(".")[1] + "." + section + ".png")
+    imageUrl = product_card[product - 1].male1.split(".")[1] + "." + section + ".png";
   }
   else if (mode=='4') {
     imageUrl = "images/Gold_Female1" + "." + section + ".png";
