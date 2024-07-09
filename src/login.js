@@ -17,10 +17,12 @@ function Login({ handleLogin }) {
         if (userDoc.exists()) {
           // User already exists, prevent login
           alert(
-            "Dieser Probandencode exitiert bereits. Bitte geben Sie stattdessen 𝐈𝐡𝐫𝐞 𝐈𝐧𝐢𝐭𝐢𝐚𝐥𝐞𝐧 𝐮𝐧𝐝 𝐢𝐡𝐫𝐞 𝐇𝐚𝐮𝐬𝐧𝐮𝐦𝐦𝐞𝐫 (z.B. LM06) ein."
+            "This ID already exists. Please enter your initials + house number (e.g., LD15)"
           );
         } else {
           // User does not exist, navigate to the home page
+          sessionStorage.removeItem("shuffledIDs");
+          sessionStorage.setItem("productdetailsVersion",JSON.stringify([...Array(5)].map(() => Math.random() < 0.5)));
           const searchParams = new URLSearchParams(window.location.search);
           navigate(`/home?mode=${searchParams.get("mode")}&userId=${userId}`);
 
@@ -46,12 +48,11 @@ function Login({ handleLogin }) {
     <div>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="label-text">
-          Bitte geben Sie noch einmal Ihren Probandencode ein (Initialen +
-          Geburtstag, z.B. LV03)
+        Please enter your response ID (initials + day of birth, e.g., LD03)
         </label>
         <input required type="text" className="form-control" name="title" />
         <br />
-        <input type="submit" className="btn btn-primary" value="abschicken" />
+        <input type="submit" className="btn btn-primary" value="Submit" />
       </form>
     </div>
   );

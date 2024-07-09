@@ -23,8 +23,8 @@ ReactGA.initialize(TRACKING_ID);
 
 const DynamicMoreinfo = ({ userId }) => {
   const urlParams = new URLSearchParams(window.location.search);
-  const version = urlParams.get("version");
-  return version === "good" ? <MoreinfoPositive userId={userId} /> : <MoreinfoNegative userId={userId} />;
+  const version = urlParams.get("isGoodVersion");
+  return version === "true" ? <MoreinfoPositive userId={userId} /> : <MoreinfoNegative userId={userId} />;
 };
 
 const App = () => {

@@ -4,7 +4,7 @@ import SecondHeader from "./Components/SecondHeader";
 import Footer from "./Components/Footer";
 import styled from "styled-components";
 import data from "./data/product_data";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"; 
 import { doc, setDoc, arrayUnion } from "@firebase/firestore";
 import { db } from "./services/firebase";
 
@@ -19,7 +19,6 @@ const MoreinfoPositive = () => {
   const userId = urlParams.get("userId");
   const product = data.filter((product) => product.id == product_id)[0];
 
-  // const [openFeatures, setOpenFeatures] = useState("")
   const [openFeaturesUV, setOpenFeaturesUV] = useState(false);
   const [openFeaturesPOL, setOpenFeaturesPOL] = useState(false);
   const [openFeaturesZU, setOpenFeaturesZU] = useState(false);
@@ -40,7 +39,6 @@ const MoreinfoPositive = () => {
       console.log(err);
     }
   };
-  // Record the time when the component mounts as page start time
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -51,9 +49,8 @@ const MoreinfoPositive = () => {
   }, []);
   useEffect(() => {
     return () => {
-      // Calculate the time spent on the page
       const pageEndTime = Date.now();
-      const timeSpentInSeconds = (pageEndTime - pageStartTime) / 1000; // Calculate time spent in seconds
+      const timeSpentInSeconds = (pageEndTime - pageStartTime) / 1000;
       sessionStorage.setItem(
         "timeSpentOnProductDetailsPage",
         initalTimeSpent + timeSpentInSeconds
@@ -64,7 +61,7 @@ const MoreinfoPositive = () => {
   const handleClick = (feature) => {
     console.log("handleClick", feature, userId);
 
-    const ref = doc(db, "users", userId); // Firebase creates this automatically
+    const ref = doc(db, "users", userId);
     let data = {
       "Clicked Feature": arrayUnion(feature + " " + new Date()),
     };
@@ -85,17 +82,27 @@ const MoreinfoPositive = () => {
       </div>
       <div id="top" className="moreinfopage">
         <hr />
-        <h1>Produktdetails Positive </h1>
+        <h1>Product Details </h1>
         <hr />
         <h2>
           {product.uv_tag}
-          <AiOutlinePlus
-            size={25}
-            onClick={() => {
-              setOpenFeaturesUV(!openFeaturesUV);
-              handleClick("UV-Filter");
-            }}
-          />{" "}
+          {openFeaturesUV ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesUV(!openFeaturesUV);
+                handleClick("UV-Filter");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesUV(!openFeaturesUV);
+                handleClick("UV-Filter");
+              }}
+            />
+          )}
         </h2>
         <p style={{ display: openFeaturesUV ? "block" : "none" }}>
           The {product.product_name} impresses with the built-in UV protection
@@ -106,13 +113,23 @@ const MoreinfoPositive = () => {
 
         <h2>
           {product.Polarisierung_tag}
-          <AiOutlinePlus
-            size={25}
-            onClick={() => {
-              setOpenFeaturesPOL(!openFeaturesPOL);
-              handleClick("Polarisierung");
-            }}
-          />{" "}
+          {openFeaturesPOL ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesPOL(!openFeaturesPOL);
+                handleClick("Polarisierung");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesPOL(!openFeaturesPOL);
+                handleClick("Polarisierung");
+              }}
+            />
+          )}
         </h2>
         <p style={{ display: openFeaturesPOL ? "block" : "none" }}>
           Polarized sunglasses not only offer protection from harmful UV
@@ -122,13 +139,23 @@ const MoreinfoPositive = () => {
         <hr />
         <h2>
           {product.Material}
-          <AiOutlinePlus
-            size={25}
-            onClick={() => {
-              setOpenFeaturesZU(!openFeaturesZU);
-              handleClick("Material");
-            }}
-          />{" "}
+          {openFeaturesZU ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesZU(!openFeaturesZU);
+                handleClick("Material");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesZU(!openFeaturesZU);
+                handleClick("Material");
+              }}
+            />
+          )}
         </h2>
         <p style={{ display: openFeaturesZU ? "block" : "none" }}>
           The frame of the {product.product_name} is made of high-quality metal,
@@ -137,13 +164,23 @@ const MoreinfoPositive = () => {
         <hr />
         <h2>
           {product.Lenses}
-          <AiOutlinePlus
-            size={25}
-            onClick={() => {
-              setOpenFeaturesSEH(!openFeaturesSEH);
-              handleClick("Sehstärke");
-            }}
-          />
+          {openFeaturesSEH ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesSEH(!openFeaturesSEH);
+                handleClick("Sehstärke");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesSEH(!openFeaturesSEH);
+                handleClick("Sehstärke");
+              }}
+            />
+          )}
         </h2>
         <p style={{ display: openFeaturesSEH ? "block" : "none" }}>
           The {product.product_name} is equipped with high-quality, hard-wearing

@@ -21,19 +21,11 @@ const ProductDisplay = ({ product, userId, mode }) => {
     } catch (err) {
       console.log(err);
     }
+    
+    const seenVersion = sessionStorage.getItem("productdetailsVersion");
+    let nextVersion = JSON.parse(seenVersion)[product.id-1];
 
-    const seenVersion = sessionStorage.getItem("seenVersion");
-    let nextVersion = "good";
-    if (seenVersion === "good") {
-      nextVersion = "bad";
-    } else if (seenVersion === "bad") {
-      nextVersion = "good";
-    } else {
-      nextVersion = Math.random() < 0.5 ? "good" : "bad";
-    }
-    sessionStorage.setItem("seenVersion", nextVersion);
-
-    navigate(`/product/moreinfo?product_id=${product.id}&userId=${userId}&version=${nextVersion}`);
+    navigate(`/product/moreinfo?product_id=${product.id}&userId=${userId}&isGoodVersion=${nextVersion}`);
   };
   
   return (

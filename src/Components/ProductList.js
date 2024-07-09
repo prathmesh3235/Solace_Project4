@@ -6,12 +6,25 @@ import { db } from "../services/firebase";
 
 // Function to shuffle the array
 const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+  const sessionKey = 'shuffledIDs';
+  let storedOrder = sessionStorage.getItem(sessionKey);
+
+  if (storedOrder) {
+    // If a list is already present, sort the array in the order stored
+    const order = JSON.parse(storedOrder);
+    return array.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+  } else {
+    // If no list is present, shuffle the array and store the order
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    const ids = array.map(item => item.id);
+    sessionStorage.setItem(sessionKey, JSON.stringify(ids));
+    return array;
   }
-  return array;
 };
+
 
 const ProductList = ({ ref, userId }) => {
   // Shuffle the product list
