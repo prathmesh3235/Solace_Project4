@@ -25,7 +25,7 @@ const ProductDisplay = ({ product, userId, mode }) => {
     const seenVersion = sessionStorage.getItem("productdetailsVersion");
     let nextVersion = JSON.parse(seenVersion)[product.id-1];
 
-    navigate(`/product/moreinfo?product_id=${product.id}&userId=${userId}&isGoodVersion=${nextVersion}`);
+    navigate(`/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isGoodVersion=${nextVersion}`);
   };
   
   return (

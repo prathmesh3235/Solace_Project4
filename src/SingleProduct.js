@@ -20,6 +20,8 @@ const SingleProduct = () => {
   const [userId, setUserId] = useState(false);
   const [pageStartTime, setPageStartTime] = useState(0);
   const [initialTimeSpent, setInitialTimeSpent] = useState(0);
+  const [upperSectionStartTime, setUpperSectionStartTime] = useState(null);
+
   const handleJetztKaufenClick = (data) => {
     console.log("check cart button", product_id);
     const ref = doc(db, "users", userId);
@@ -57,6 +59,7 @@ const SingleProduct = () => {
       parseInt(sessionStorage.getItem("timeSpentOnSingleProductPage")) || 0
     );
   }, []);
+
   useEffect(() => {
     return () => {
       // Calculate the time spent on the page
@@ -68,6 +71,47 @@ const SingleProduct = () => {
       );
     };
   }, [pageStartTime]);
+
+  useEffect(() => {
+    const upperSectionDiv = document.querySelector(".uppersection");
+
+    const handleMouseEnter = () => {
+      setUpperSectionStartTime(Date.now());
+    };
+
+    const handleMouseLeave = async () => {
+      if (upperSectionStartTime) {
+        const timeSpentInUpperSection = (Date.now() - upperSectionStartTime) / 1000;
+        console.log("Time spent in upper section:", timeSpentInUpperSection);
+
+        // Save the time spent in Firebase
+        if (userId) {
+          const ref = doc(db, "users", userId);
+          try {
+            await setDoc(
+              ref,
+              { "Time Spent on Presentation Section": arrayUnion({product_id, timeSpentInUpperSection }) },
+              { merge: true }
+            );
+          } catch (err) {
+            console.log("Error saving time spent in upper section:", err);
+          }
+        }
+      }
+    };
+
+    if (upperSectionDiv) {
+      upperSectionDiv.addEventListener("mouseenter", handleMouseEnter);
+      upperSectionDiv.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    return () => {
+      if (upperSectionDiv) {
+        upperSectionDiv.removeEventListener("mouseenter", handleMouseEnter);
+        upperSectionDiv.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+  }, [upperSectionStartTime, userId, product_id]);
 
   return (
     <Wrapper
@@ -91,23 +135,17 @@ const SingleProduct = () => {
               alignItems: "center",
             }}
           >
-          <h1 className="upperSectionHeading"> {product.product_name} </h1>
+            <h1 className="upperSectionHeading"> {product.product_name} </h1>
             {mode == "2" ? (
               <Videosection userId={userId} product={product} />
-            ) : mode == "3" ? (
+            ) : mode == "3" || mode == "4" ? (
               <>
                 <Model3D className="3dmodel-wrapper" product={product_id} mode={mode} />
               </>
-            ) :  mode == "4" ? (
-              <>
-                <Model3D className="3dmodel-wrapper" product={product_id} mode={mode} />
-              </>
-            ) :(
+            ) : (
               <iframe
                 className="VRiframe"
-                src={
-                  "https://virtual-tryon-five.vercel.app/?sku=" + product.sku
-                }
+                src={"https://virtual-tryon-five.vercel.app/?sku=" + product.sku}
                 title="Virtual Try On"
                 frameBorder="0"
                 width="500"
