@@ -6,10 +6,11 @@ import { Button } from "../styles/Button";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc, arrayUnion } from "@firebase/firestore";
 import { db } from "../services/firebase";
-import product_card from "../data/product_data";
+
 
 const ProductDisplay = ({ product, userId, mode }) => {
   const navigate = useNavigate();
+  window.scrollTo(0, 0);
 
   const handleClick = () => {
     const ref = doc(db, "users", userId);

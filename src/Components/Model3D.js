@@ -6,7 +6,6 @@ const Model3D = ({ product, mode}) => {
   let imageUrl
   
   if (mode=='3') {
-    console.log("Plcbnslfblv",product_card[product - 1].male1.split(".")[1] + "." + section + ".png")
     imageUrl = product_card[product - 1].male1.split(".")[1] + "." + section + ".png";
   }
   else if (mode=='4') {
@@ -42,6 +41,7 @@ const Model3D = ({ product, mode}) => {
     div {
       width: 60%;
       background-repeat: no-repeat;
+      background-position: center;
       background-size: contain;
     }
     @media screen and (max-width: 767px) {
