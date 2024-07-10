@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import data from "./data/product_data";
+import product_card from "./data/product_data"; // Ensure the correct import path
 import Productpage from "./Components/Productpage";
 import ProductDisplay from "./Components/ProductDisplay";
 import Footer from "./Components/Footer";
@@ -12,12 +12,10 @@ import Model3D from "./Components/Model3D";
 
 const SingleProduct = () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const product_id = urlParams.get("product_id");
-  const [product, setProduct] = useState(
-    data.filter((product) => product.id == product_id)[0]
-  );
-  const [mode, setMode] = useState(false);
-  const [userId, setUserId] = useState(false);
+  const product_id = parseInt(urlParams.get("product_id"), 10); // Ensure product_id is a number
+  const [product, setProduct] = useState({});
+  const [mode, setMode] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [pageStartTime, setPageStartTime] = useState(0);
   const [initialTimeSpent, setInitialTimeSpent] = useState(0);
   const [upperSectionStartTime, setUpperSectionStartTime] = useState(null);
@@ -37,14 +35,6 @@ const SingleProduct = () => {
     }
   };
 
-  const image = [
-    "images/3dproduct1.1.png",
-    "images/3dproduct1.2.png",
-    "images/3dproduct1.3.png",
-    "images/3dproduct1.4.png",
-    "images/3dproduct1.5.png",
-  ];
-
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -55,22 +45,29 @@ const SingleProduct = () => {
 
     // Record the time when the component mounts as page start time
     setPageStartTime(Date.now());
+    // Find the product
+    const product = product_card.find((product) => product.id === product_id);
+    setProduct(product);
+
     setInitialTimeSpent(
-      parseInt(sessionStorage.getItem("timeSpentOnSingleProductPage")) || 0
+      parseInt(sessionStorage.getItem(`timeSpentOnSingleProductPage_${product.product_name}`)) || 0
     );
-  }, []);
+
+  }, [product_id]);
 
   useEffect(() => {
     return () => {
-      // Calculate the time spent on the page
-      const pageEndTime = Date.now();
-      const timeSpentInSeconds = (pageEndTime - pageStartTime) / 1000; // Calculate time spent in seconds
-      sessionStorage.setItem(
-        `timeSpentOnSingleProductPage_${product_id}`,
-        initialTimeSpent + timeSpentInSeconds
-      );
+      if (product.product_name) {
+        // Save the time spent on the page
+        const pageEndTime = Date.now();
+        const timeSpentInSeconds = (pageEndTime - pageStartTime) / 1000; // Calculate time spent in seconds
+        sessionStorage.setItem(
+          `timeSpentOnSingleProductPage_${product.product_name}`,
+          initialTimeSpent + timeSpentInSeconds
+        );
+      }
     };
-  }, [pageStartTime]);
+  }, [pageStartTime, initialTimeSpent, product_id, product]);
 
   useEffect(() => {
     const upperSectionDiv = document.querySelector(".uppersection");
@@ -90,7 +87,7 @@ const SingleProduct = () => {
           try {
             await setDoc(
               ref,
-              { "Time Spent on Presentation Section": arrayUnion({product_id, timeSpentInUpperSection }) },
+              { "Time Spent on Presentation Section": arrayUnion({ productName: product.product_name, timeSpentInUpperSection }) },
               { merge: true }
             );
           } catch (err) {
@@ -113,6 +110,10 @@ const SingleProduct = () => {
     };
   }, [upperSectionStartTime, userId, product_id]);
 
+  if (!product) {
+    return <div>Loading...</div>; // Display a loading message or a fallback UI
+  }
+
   return (
     <Wrapper
       style={{
@@ -130,15 +131,14 @@ const SingleProduct = () => {
         <div className="uppersection">
           <div
             style={{
-              // display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
             <h1 className="upperSectionHeading"> {product.product_name} </h1>
-            {mode == "2" ? (
+            {mode === "2" ? (
               <Videosection userId={userId} product={product} />
-            ) : mode == "3" || mode == "4" ? (
+            ) : mode === "3" || mode === "4" ? (
               <>
                 <Model3D className="3dmodel-wrapper" product={product_id} mode={mode} />
               </>
@@ -157,10 +157,6 @@ const SingleProduct = () => {
         </div>
 
         <div className="single-product-page">
-          {/* <div className="slider-block">
-            {" "}
-            <Productpage userId={userId} product={product} mode={mode} />
-          </div> */}
           <div className="prod-disp">
             <ProductDisplay userId={userId} product={product} mode={mode} />
           </div>
@@ -227,7 +223,6 @@ const Wrapper = styled.section`
     hr {
       max-width: 100%;
       width: 90%;
-      /* height: 0.2rem; */
       border: 0.1rem solid #000;
       color: red;
     }

@@ -17,7 +17,7 @@ const MoreinfoPositive = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const product_id = urlParams.get("product_id");
   const userId = urlParams.get("userId");
-  const product = data.filter((product) => product.id == product_id)[0];
+  const product = data.find((product) => product.id == product_id) || {};
 
   const [openFeaturesUV, setOpenFeaturesUV] = useState(false);
   const [openFeaturesPOL, setOpenFeaturesPOL] = useState(false);
@@ -43,7 +43,7 @@ const MoreinfoPositive = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setInitalTimeSpent(
-      parseInt(sessionStorage.getItem("timeSpentOnProductDetailsPage")) || 0
+      parseInt(sessionStorage.getItem("timeSpentOnProductDetailsPage_" + product.product_name)) || 0
     );
     setPageStartTime(Date.now());
   }, []);
@@ -52,7 +52,7 @@ const MoreinfoPositive = () => {
       const pageEndTime = Date.now();
       const timeSpentInSeconds = (pageEndTime - pageStartTime) / 1000;
       sessionStorage.setItem(
-        "timeSpentOnProductDetailsPage",
+        "timeSpentOnProductDetailsPage_" + product.product_name,
         initalTimeSpent + timeSpentInSeconds
       );
     };

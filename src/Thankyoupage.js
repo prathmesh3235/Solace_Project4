@@ -11,18 +11,27 @@ const Thankyoupage = () => {
   useEffect(() => {
     const ref = doc(db, "users", userId);
     let timeSpentData = {};
+    let totalTimeSpentOnSingleProductPage = 0;
+    let totalTimeSpentOnProductDetailsPage = 0;
     Object.keys(sessionStorage).forEach((key) => {
+      if (key.startsWith("timeSpentOnSingleProductPage")) {
+        totalTimeSpentOnSingleProductPage += parseFloat(sessionStorage.getItem(key)) || 0;
+      }
+      if (key.startsWith("timeSpentOnProductDetailsPage")) {
+        totalTimeSpentOnProductDetailsPage += parseFloat(sessionStorage.getItem(key)) || 0;
+      }
       timeSpentData[key] = sessionStorage.getItem(key);
     });
+    timeSpentData.totalTimeSpentOnSingleProductPage = totalTimeSpentOnSingleProductPage;
+    timeSpentData.totalTimeSpentOnProductDetailsPage = totalTimeSpentOnProductDetailsPage;
+
     try {
       setDoc(ref, timeSpentData, { merge: true });
     } catch (err) {
       console.log("error cart button");
       console.log(err);
     } finally {
-      sessionStorage.removeItem("timeSpentOnHomePage");
-      sessionStorage.removeItem("timeSpentOnSingleProductPage");
-      sessionStorage.removeItem("timeSpentOnProductDetailsPage");
+      sessionStorage.clear();
     }
   }, []);
 

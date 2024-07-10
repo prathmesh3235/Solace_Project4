@@ -46,7 +46,7 @@ const MoreinfoNegative = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setInitalTimeSpent(
-      parseInt(sessionStorage.getItem("timeSpentOnProductDetailsPage")) || 0
+      parseInt(sessionStorage.getItem("timeSpentOnProductDetailsPage_" + product.product_name)) || 0
     );
     setPageStartTime(Date.now());
   }, []);
@@ -56,7 +56,7 @@ const MoreinfoNegative = () => {
       const pageEndTime = Date.now();
       const timeSpentInSeconds = (pageEndTime - pageStartTime) / 1000;
       sessionStorage.setItem(
-        "timeSpentOnProductDetailsPage",
+        "timeSpentOnProductDetailsPage_" + product.product_name,
         initalTimeSpent + timeSpentInSeconds
       );
     };

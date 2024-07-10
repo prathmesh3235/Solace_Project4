@@ -10,6 +10,7 @@ function Login({ handleLogin }) {
     const userId = e.target.title.value.trim();
 
     if (userId.length > 0) {
+      sessionStorage.clear();
       // Check if the user already exists in the database
       const userRef = doc(db, "users", userId);
       try {
