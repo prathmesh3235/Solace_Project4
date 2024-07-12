@@ -7,6 +7,7 @@ import { db } from "./services/firebase";
 const Thankyoupage = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get("userId");
+  const mode = urlParams.get("mode");
 
   useEffect(() => {
     const ref = doc(db, "users", userId);
@@ -38,15 +39,24 @@ const Thankyoupage = () => {
   return (
     <div>
       <div className="thirdHeader">
-        <h1> .</h1>
+        <h1>.</h1>
       </div>
       <div className="thankyoutext">
-        <h2 className="tyh2"> Thank You. </h2>
-        <br />{" "}
-        <h3 className="tyh3">
-          {" "}
-          Please close this website now and return to the survey to finish it.
-        </h3>
+        <h2 className="tyh2">Thank You.</h2>
+        <br />
+        <div>
+          {mode === "2" || mode === "3" ? (
+            <h3 className="tyh4">
+              Now, 
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_290EXgz8nt7F2xo"> please follow this link to return to the survey.</a>
+            </h3>
+          ) : mode === "1" ? (
+            <h3>
+              Now,
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_0HghB9tE9uvbVPg"> please follow this link to return to the survey.</a>
+            </h3>
+          ) : null}
+        </div>
       </div>
       <Footer />
     </div>

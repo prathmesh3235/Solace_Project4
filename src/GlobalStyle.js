@@ -53,7 +53,11 @@ video{
 }
 
 .thankyoutext{
-  margin-bottom: 30rem;
+  margin-bottom: 20rem;
+}
+.tyh4{
+  font-size: 30px;
+  text-align: center;
 }
 .product-info-i{
   font-size:50px;
