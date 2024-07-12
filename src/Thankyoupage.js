@@ -51,7 +51,7 @@ const Thankyoupage = () => {
               <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_290EXgz8nt7F2xo"> please follow this link to return to the survey.</a>
             </h3>
           ) : mode === "1" ? (
-            <h3>
+            <h3 className="tyh4">
               Now,
               <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_0HghB9tE9uvbVPg"> please follow this link to return to the survey.</a>
             </h3>
