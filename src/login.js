@@ -40,7 +40,7 @@ function Login({ handleLogin }) {
         );
       } else {
         sessionStorage.removeItem("shuffledIDs");
-        sessionStorage.setItem("productdetailsVersion", JSON.stringify([...Array(5)].map(() => Math.random() < 0.5)));
+        sessionStorage.setItem("productdetailsVersion", JSON.stringify(userId[userId.length - 1] % 2 == 0 ? [true,false,true,false, true] : [false, true, false, true, false]));
         const searchParams = new URLSearchParams(window.location.search);
         navigate(`/home?mode=${searchParams.get("mode")}&userId=${userId}`);
 

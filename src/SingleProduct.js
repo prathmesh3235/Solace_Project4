@@ -71,12 +71,14 @@ const SingleProduct = () => {
 
   useEffect(() => {
     const upperSectionDiv = document.querySelector(".uppersection");
+    const singelProductPage = document.querySelector(".single-product-page");
 
     const handleMouseEnter = () => {
       setUpperSectionStartTime(Date.now());
     };
 
     const handleMouseLeave = async () => {
+      console.log("Exiitt", upperSectionStartTime)
       if (upperSectionStartTime) {
         const timeSpentInUpperSection = (Date.now() - upperSectionStartTime) / 1000;
         console.log("Time spent in upper section:", timeSpentInUpperSection);
@@ -85,6 +87,7 @@ const SingleProduct = () => {
         if (userId) {
           const ref = doc(db, "users", userId);
           try {
+            console.log("Error saving time spent in upper section: vhvhbh");
             await setDoc(
               ref,
               { "Time Spent on Presentation Section": arrayUnion({ productName: product.product_name, timeSpentInUpperSection }) },
@@ -96,16 +99,21 @@ const SingleProduct = () => {
         }
       }
     };
-
-    if (upperSectionDiv) {
+    if (upperSectionDiv && mode != 1) {
       upperSectionDiv.addEventListener("mouseenter", handleMouseEnter);
       upperSectionDiv.addEventListener("mouseleave", handleMouseLeave);
+    } else if (upperSectionDiv && singelProductPage && mode == 1) {
+      upperSectionDiv.addEventListener("mouseenter", handleMouseEnter);
+      singelProductPage.addEventListener("mouseenter", handleMouseLeave);
     }
 
     return () => {
-      if (upperSectionDiv) {
+      if (upperSectionDiv && mode != 1) {
         upperSectionDiv.removeEventListener("mouseenter", handleMouseEnter);
         upperSectionDiv.removeEventListener("mouseleave", handleMouseLeave);
+      } else if (upperSectionDiv && singelProductPage && mode == 1) {
+        upperSectionDiv.addEventListener("mouseenter", handleMouseEnter);
+        singelProductPage.addEventListener("mouseenter", handleMouseLeave);
       }
     };
   }, [upperSectionStartTime, userId, product_id]);
