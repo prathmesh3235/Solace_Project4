@@ -5,43 +5,58 @@ import { db } from "./services/firebase";
 function Login({ handleLogin }) {
   const navigate = useNavigate();
 
+  const validateUserId = (userId) => {
+    if (userId.length !== 4) {
+      return "User ID must be exactly 4 characters long.";
+    }
+    const letters = userId.slice(0, 2);
+    const numbers = userId.slice(2);
+    if (!/^[A-Za-z]{2}$/.test(letters)) {
+      return "The first two characters must be letters.";
+    }
+    if (!/^\d{2}$/.test(numbers)) {
+      return "The last two characters must be numbers.";
+    }
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = e.target.title.value.trim();
+    
+    const validationError = validateUserId(userId);
+    if (validationError) {
+      alert(validationError);
+      return;
+    }
 
-    if (userId.length > 0) {
-      sessionStorage.clear();
-      // Check if the user already exists in the database
-      const userRef = doc(db, "users", userId);
-      try {
-        const userDoc = await getDoc(userRef);
-        if (userDoc.exists()) {
-          // User already exists, prevent login
-          alert(
-            "This ID already exists. Please enter your initials + house number (e.g., LD15)"
-          );
-        } else {
-          // User does not exist, navigate to the home page
-          sessionStorage.removeItem("shuffledIDs");
-          sessionStorage.setItem("productdetailsVersion",JSON.stringify([...Array(5)].map(() => Math.random() < 0.5)));
-          const searchParams = new URLSearchParams(window.location.search);
-          navigate(`/home?mode=${searchParams.get("mode")}&userId=${userId}`);
+    sessionStorage.clear();
+    const userRef = doc(db, "users", userId);
+    try {
+      const userDoc = await getDoc(userRef);
+      if (userDoc.exists()) {
+        alert(
+          "This ID already exists. Please enter your initials + house number (e.g., LD15)"
+        );
+      } else {
+        sessionStorage.removeItem("shuffledIDs");
+        sessionStorage.setItem("productdetailsVersion", JSON.stringify([...Array(5)].map(() => Math.random() < 0.5)));
+        const searchParams = new URLSearchParams(window.location.search);
+        navigate(`/home?mode=${searchParams.get("mode")}&userId=${userId}`);
 
-          // Create a new user record in the database
-          const data = {
-            userId: userId,
-            mode: searchParams.get("mode"),
-          };
+        const data = {
+          userId: userId,
+          mode: searchParams.get("mode"),
+        };
 
-          try {
-            await setDoc(userRef, data);
-          } catch (err) {
-            console.error(err);
-          }
+        try {
+          await setDoc(userRef, data);
+        } catch (err) {
+          console.error(err);
         }
-      } catch (err) {
-        console.error(err);
       }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -49,7 +64,7 @@ function Login({ handleLogin }) {
     <div>
       <form className="login-form" onSubmit={handleSubmit}>
         <label className="label-text">
-        Please enter your response ID (initials + day of birth, e.g., LD03)
+          Please enter your response ID (initials + day of birth, e.g., LD03)
         </label>
         <input required type="text" className="form-control" name="title" />
         <br />
