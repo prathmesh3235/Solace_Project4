@@ -8,14 +8,16 @@ import { doc, setDoc, arrayUnion } from "@firebase/firestore";
 import { db } from "../services/firebase";
 
 
-const ProductDisplay = ({ product, userId, mode }) => {
+const ProductDisplay = ({ product, userId, mode, timeData }) => {
   const navigate = useNavigate();
   window.scrollTo(0, 0);
 
   const handleClick = () => {
     const ref = doc(db, "users", userId);
+    console.log("handleClick", timeData)
     let data = {
       "Clicked More Information": arrayUnion(product.product_name + " " + new Date()),
+      "Time Spent on Presentation Section": timeData
     };
     try {
       setDoc(ref, data, { merge: true });
@@ -24,7 +26,8 @@ const ProductDisplay = ({ product, userId, mode }) => {
     }
     
     const seenVersion = sessionStorage.getItem("productdetailsVersion");
-    let nextVersion = JSON.parse(seenVersion)[product.id-1];
+    const productIdSecvence = sessionStorage.getItem("shuffledIDs");
+    let nextVersion = JSON.parse(seenVersion)[JSON.parse(productIdSecvence).indexOf(product.id)];
 
     navigate(`/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isGoodVersion=${nextVersion}`);
   };

@@ -19,6 +19,7 @@ const SingleProduct = () => {
   const [pageStartTime, setPageStartTime] = useState(0);
   const [initialTimeSpent, setInitialTimeSpent] = useState(0);
   const [upperSectionStartTime, setUpperSectionStartTime] = useState(null);
+  const [timeData, setTimeData] = useState();
 
   const handleJetztKaufenClick = (data) => {
     console.log("check cart button", product_id);
@@ -85,14 +86,14 @@ const SingleProduct = () => {
 
         // Save the time spent in Firebase
         if (userId) {
-          const ref = doc(db, "users", userId);
+          // const ref = doc(db, "users", userId);
           try {
-            console.log("Error saving time spent in upper section: vhvhbh");
-            await setDoc(
-              ref,
-              { "Time Spent on Presentation Section": arrayUnion({ productName: product.product_name, timeSpentInUpperSection }) },
-              { merge: true }
-            );
+            setTimeData({ productName: product.product_name, timeSpentInUpperSection })
+            // await setDoc(
+            //   ref,
+            //   { "Time Spent on Presentation Section": arrayUnion({ productName: product.product_name, timeSpentInUpperSection }) },
+            //   { merge: true }
+            // );
           } catch (err) {
             console.log("Error saving time spent in upper section:", err);
           }
@@ -166,7 +167,8 @@ const SingleProduct = () => {
 
         <div className="single-product-page">
           <div className="prod-disp">
-            <ProductDisplay userId={userId} product={product} mode={mode} />
+            {JSON.stringify(timeData)}
+            <ProductDisplay userId={userId} product={product} mode={mode} timeData={timeData} />
           </div>
         </div>
         <Footer />
