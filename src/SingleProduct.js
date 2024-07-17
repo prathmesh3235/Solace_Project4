@@ -164,7 +164,7 @@ const SingleProduct = () => {
 
         <div className="single-product-page">
           <div className="prod-disp">
-            {JSON.stringify(timeData)}
+            {/* {JSON.stringify(timeData)} */}
             <ProductDisplay userId={userId} product={product} mode={mode} timeData={timeData} />
           </div>
         </div>
