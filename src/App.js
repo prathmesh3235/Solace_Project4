@@ -37,7 +37,6 @@ const App = () => {
 
   const handleLogin = (id) => {
     setUserId(id);
-    console.log("Login", id);
   };
   const ref = useRef(null);
 

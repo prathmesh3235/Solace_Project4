@@ -18,9 +18,6 @@ const MoreinfoNegative = () => {
   const product_id = urlParams.get("product_id");
   const userId = urlParams.get("userId");
   const product = data.filter((product) => product.id == product_id)[0];
-  console.log(urlParams.get("userId"));
-
-
   const [openFeaturesUV, setOpenFeaturesUV] = useState(false);
   const [openFeaturesPOL, setOpenFeaturesPOL] = useState(false);
   const [openFeaturesZU, setOpenFeaturesZU] = useState(false);
@@ -39,7 +36,7 @@ const MoreinfoNegative = () => {
       );
     } catch (err) {
       console.log("error cart button");
-      console.log(err);
+
     }
   };
 
@@ -63,8 +60,6 @@ const MoreinfoNegative = () => {
   }, [pageStartTime]);
 
   const handleClick = (feature) => {
-    console.log("handleClick", feature, userId);
-
     const ref = doc(db, "users", userId);
     let data = {
       "Clicked Feature": arrayUnion(feature + " " + new Date()),

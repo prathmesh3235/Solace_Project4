@@ -26,7 +26,6 @@ const MoreinfoPositive = () => {
   const [pageStartTime, setPageStartTime] = useState(0);
   const [initalTimeSpent, setInitalTimeSpent] = useState(0);
   const handleJetztKaufenClick = (data) => {
-    console.log("check cart button");
     const ref = doc(db, "users", userId);
     try {
       setDoc(
@@ -35,7 +34,6 @@ const MoreinfoPositive = () => {
         { merge: true }
       );
     } catch (err) {
-      console.log("error cart button");
       console.log(err);
     }
   };
@@ -59,8 +57,6 @@ const MoreinfoPositive = () => {
   }, [pageStartTime]);
 
   const handleClick = (feature) => {
-    console.log("handleClick", feature, userId);
-
     const ref = doc(db, "users", userId);
     let data = {
       "Clicked Feature": arrayUnion(feature + " " + new Date()),

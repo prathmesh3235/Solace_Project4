@@ -22,7 +22,6 @@ const SingleProduct = () => {
   const [timeData, setTimeData] = useState();
 
   const handleJetztKaufenClick = (data) => {
-    console.log("check cart button", product_id);
     const ref = doc(db, "users", userId);
     try {
       setDoc(
@@ -79,10 +78,8 @@ const SingleProduct = () => {
     };
 
     const handleMouseLeave = async () => {
-      console.log("Exiitt", upperSectionStartTime)
       if (upperSectionStartTime) {
         const timeSpentInUpperSection = (Date.now() - upperSectionStartTime) / 1000;
-        console.log("Time spent in upper section:", timeSpentInUpperSection);
 
         // Save the time spent in Firebase
         if (userId) {

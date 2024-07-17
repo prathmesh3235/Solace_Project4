@@ -14,7 +14,6 @@ const ProductDisplay = ({ product, userId, mode, timeData }) => {
 
   const handleClick = () => {
     const ref = doc(db, "users", userId);
-    console.log("handleClick", timeData)
     let data = {
       "Clicked More Information": arrayUnion(product.product_name + " " + new Date()),
       "Time Spent on Presentation Section": timeData

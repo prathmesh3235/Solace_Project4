@@ -17,8 +17,6 @@ const Home = ({ ref }) => {
     description: "This is a description for the home page",
   };
   const handleClick = (feature) => {
-    console.log("handleClick", feature, userId);
-
     const ref = doc(db, "users", userId); // Firebase creates this automatically
     let data = {
       "Clicked Feature": arrayUnion(feature + " " + new Date()),
