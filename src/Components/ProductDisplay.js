@@ -14,7 +14,7 @@ const ProductDisplay = ({ product, userId, mode, timeData }) => {
     const ref = doc(db, "users", userId);
     const data = {
       "Clicked More Information": arrayUnion(product.product_name + " " + new Date()),
-      "Time Spent on Presentation Section": timeData,
+      "Time Spent on Presentation Section": arrayUnion(timeData),
     };
     try {
       await setDoc(ref, data, { merge: true });
@@ -89,7 +89,7 @@ const Wrapper = styled.section`
     text-align: center;
     font-weight: bold;
     text-decoration: underline;
-    text-decoration-color: blue;
+    // text-decoration-color: blue;
     text-decoration-thickness: 5px;
   }
 
