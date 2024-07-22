@@ -8,8 +8,10 @@ const Thankyoupage = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get("userId");
   const mode = urlParams.get("mode");
+  const version = urlParams.get("isV");
 
   useEffect(() => {
+    console.log("Version: " + version);
     const ref = doc(db, "users", userId);
     let timeSpentData = {};
     let totalTimeSpentOnSingleProductPage = 0;
@@ -45,15 +47,25 @@ const Thankyoupage = () => {
         <h2 className="tyh2">Thank You.</h2>
         <br />
         <div>
-          {mode === "2" || mode === "3" ? (
+          {version==="true" &&(mode === "2" || mode === "3") ? (
             <h3 className="tyh4">
               Now, 
               <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_290EXgz8nt7F2xo"> please follow this link to return to the survey.</a>
             </h3>
-          ) : mode === "1" ? (
+          ) : version==="true" && mode === "1" ? (
             <h3 className="tyh4">
               Now,
               <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_0HghB9tE9uvbVPg"> please follow this link to return to the survey.</a>
+            </h3>
+          ): version==="false" && mode === "1" ? (
+            <h3 className="tyh4">
+              Now,
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6zAtTZKBKcrRcYC"> please follow this link to return to the survey.</a>
+            </h3>
+          ): version ==="false" && (mode=="2" || mode==="3")? (
+            <h3 className="tyh4">
+              Now,
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_7R4dg92AQTWaJOC"> please follow this link to return to the survey.</a>
             </h3>
           ) : null}
         </div>

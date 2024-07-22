@@ -9,8 +9,8 @@ const Videosection = ({ product, userId }) => {
       <div class="sketchfab-embed-wrapper">
         <iframe
           className="3diframe"
-          width={"700"}
-          height={"400"}
+          width={"800"}
+          height={"480"}
           title="Sun Glasses - Low Poly"
           frameborder="0"
           allowfullscreen

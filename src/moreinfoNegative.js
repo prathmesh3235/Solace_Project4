@@ -17,6 +17,7 @@ const MoreinfoNegative = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const product_id = urlParams.get("product_id");
   const userId = urlParams.get("userId");
+const version = urlParams.get("isV");
   const product = data.filter((product) => product.id == product_id)[0];
   const [openFeaturesUV, setOpenFeaturesUV] = useState(false);
   const [openFeaturesPOL, setOpenFeaturesPOL] = useState(false);
@@ -77,6 +78,7 @@ const MoreinfoNegative = () => {
         <SecondHeader
           userId={userId}
           onClickJetztKaufen={handleJetztKaufenClick}
+          version ={version}
         />
       </div>
       <div id="top" className="moreinfopage">

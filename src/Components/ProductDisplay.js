@@ -26,7 +26,7 @@ const ProductDisplay = ({ product, userId, mode, timeData }) => {
     const productIdSecvence = sessionStorage.getItem("shuffledIDs");
     let nextVersion = JSON.parse(seenVersion)[JSON.parse(productIdSecvence).indexOf(product.id)];
 
-    navigate(`/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isGoodVersion=${nextVersion}`);
+    navigate(`/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isV=${nextVersion}`);
   };
 
   useEffect(() => {

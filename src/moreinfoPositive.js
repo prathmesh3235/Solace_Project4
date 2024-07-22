@@ -7,7 +7,6 @@ import data from "./data/product_data";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai"; 
 import { doc, setDoc, arrayUnion } from "@firebase/firestore";
 import { db } from "./services/firebase";
-
 const MoreinfoPositive = () => {
   ReactGA.send({
     hitType: "pageview",
