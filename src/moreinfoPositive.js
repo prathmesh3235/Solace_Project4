@@ -17,7 +17,7 @@ const MoreinfoPositive = () => {
   const product_id = urlParams.get("product_id");
   const userId = urlParams.get("userId");
   const product = data.find((product) => product.id == product_id) || {};
-
+  const version= urlParams.get("isV");
   const [openFeaturesUV, setOpenFeaturesUV] = useState(false);
   const [openFeaturesPOL, setOpenFeaturesPOL] = useState(false);
   const [openFeaturesZU, setOpenFeaturesZU] = useState(false);
@@ -73,6 +73,8 @@ const MoreinfoPositive = () => {
         <SecondHeader
           userId={userId}
           onClickJetztKaufen={handleJetztKaufenClick}
+          product_id={product_id}
+          version={version}
         />
       </div>
       <div id="top" className="moreinfopage">

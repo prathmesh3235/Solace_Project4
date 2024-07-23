@@ -7,7 +7,7 @@ import { BsCartCheckFill } from "react-icons/bs";
 import products from "../data/product_data";
 import LOGO from "../assets/Logo_SOLACE.png";
 
-const SecondHeader = ({ userId, onClickJetztKaufen, version }) => {
+const SecondHeader = ({ userId, onClickJetztKaufen, product_id, version }) => {
   const [mode, setMode] = useState("null");
   const [productId, setProductId] = useState(null);
   const [product, setProduct] = useState(null);
@@ -62,7 +62,7 @@ const SecondHeader = ({ userId, onClickJetztKaufen, version }) => {
       <div>
         <NavLink
           onClick={() => handleClick(product ? product.product_name : "Product")}
-          to={`/thankyou?mode=${mode}&userId=${userId}&isV=${version}`}
+          to={`/thankyou?mode=${mode}&userId=${userId}&product_id=${product_id}&isV=${version}`}
           className="navbar-link-cart"
         >
           <div className="cartbutton">
