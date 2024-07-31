@@ -154,8 +154,8 @@ const SingleProduct = () => {
                 src={"https://virtual-tryon-five.vercel.app/?sku=" + product.sku}
                 title="Virtual Try On"
                 frameBorder="0"
-                width="500"
-                height="400"
+                width="750"
+                height="500"
                 allow="camera; microphone al"
               />
             )}
