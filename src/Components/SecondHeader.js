@@ -8,7 +8,6 @@ import products from "../data/product_data";
 import LOGO from "../assets/Logo_SOLACE.png";
 import { doc, setDoc, arrayUnion } from "@firebase/firestore";
 import { db } from "../services/firebase";
-import { time } from "echarts";
 
 const SecondHeader = ({
   userId,
