@@ -75,6 +75,7 @@ const MoreinfoPositive = () => {
           onClickJetztKaufen={handleJetztKaufenClick}
           product_id={product_id}
           version={version}
+          timeData={false}
         />
       </div>
       <div id="top" className="moreinfopage">

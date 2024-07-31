@@ -12,7 +12,35 @@ const Model3D = ({ product, mode}) => {
     imageUrl = "images/Gold_Female1" + "." + section + ".png";
   }
 
-  const Wrapper = styled.section`
+  return (
+    
+    <Wrapper
+      style={{
+        width: "100%",
+      }}
+    >
+      <div
+        className="3dmodel-wrapper"
+        style={{
+          backgroundImage: `url(${product ? imageUrl : ""})`,
+          // width: "900px",
+        }}
+      >
+        <ul className="list">
+          {/* <li value={0} onMouseEnter={(e) => setSection(e.target.value)}></li> */}
+          <li value={1} onMouseEnter={(e) => setSection(e.target.value)}></li>
+          <li value={2} onMouseEnter={(e) => setSection(e.target.value)}></li>
+          <li value={3} onMouseEnter={(e) => setSection(e.target.value)}></li>
+          <li value={4} onMouseEnter={(e) => setSection(e.target.value)}></li>
+          <li value={5} onMouseEnter={(e) => setSection(e.target.value)}></li>
+        </ul>
+      </div>
+    </Wrapper>
+  );
+};
+
+export default Model3D;
+const Wrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,31 +86,3 @@ const Model3D = ({ product, mode}) => {
       }
     }
   `;
-  return (
-    
-    <Wrapper
-      style={{
-        width: "100%",
-      }}
-    >
-      <div
-        className="3dmodel-wrapper"
-        style={{
-          backgroundImage: `url(${product ? imageUrl : ""})`,
-          // width: "900px",
-        }}
-      >
-        <ul className="list">
-          {/* <li value={0} onMouseEnter={(e) => setSection(e.target.value)}></li> */}
-          <li value={1} onMouseEnter={(e) => setSection(e.target.value)}></li>
-          <li value={2} onMouseEnter={(e) => setSection(e.target.value)}></li>
-          <li value={3} onMouseEnter={(e) => setSection(e.target.value)}></li>
-          <li value={4} onMouseEnter={(e) => setSection(e.target.value)}></li>
-          <li value={5} onMouseEnter={(e) => setSection(e.target.value)}></li>
-        </ul>
-      </div>
-    </Wrapper>
-  );
-};
-
-export default Model3D;

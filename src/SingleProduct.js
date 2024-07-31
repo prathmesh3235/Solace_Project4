@@ -20,6 +20,13 @@ const SingleProduct = () => {
   const [initialTimeSpent, setInitialTimeSpent] = useState(0);
   const [upperSectionStartTime, setUpperSectionStartTime] = useState(null);
   const [timeData, setTimeData] = useState();
+  const [timeSpentInUpperSection, setTimeSpentInUpperSection] = useState(0);
+  
+  const seenVersion = sessionStorage.getItem("productdetailsVersion");
+  const productIdSecvence = sessionStorage.getItem("shuffledIDs");
+  let version = JSON.parse(seenVersion)[JSON.parse(productIdSecvence).indexOf(product.id)];
+  
+
 
   const handleJetztKaufenClick = (data) => {
     const ref = doc(db, "users", userId);
@@ -37,6 +44,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setTimeSpentInUpperSection(0)
 
     // Analytics tracking for Single Product Page
     const searchParams = new URLSearchParams(window.location.search);
@@ -78,14 +86,15 @@ const SingleProduct = () => {
     };
 
     const handleMouseLeave = async () => {
+
       if (upperSectionStartTime) {
-        const timeSpentInUpperSection = (Date.now() - upperSectionStartTime) / 1000;
+        setTimeSpentInUpperSection(timeSpentInUpperSection + (Date.now() - upperSectionStartTime) / 1000)
 
         // Save the time spent in Firebase
         if (userId) {
           // const ref = doc(db, "users", userId);
           try {
-            setTimeData({ productName: product.product_name, timeSpentInUpperSection })
+            console.log("I ma here", timeSpentInUpperSection + (Date.now() - upperSectionStartTime) / 1000)
             // await setDoc(
             //   ref,
             //   { "Time Spent on Presentation Section": arrayUnion({ productName: product.product_name, timeSpentInUpperSection }) },
@@ -116,6 +125,10 @@ const SingleProduct = () => {
     };
   }, [upperSectionStartTime, userId, product_id]);
 
+  useEffect(() => {
+    setTimeData({ productName: product.product_name, timeSpentInUpperSection })
+  }, [timeSpentInUpperSection])
+
   if (!product) {
     return <div>Loading...</div>; // Display a loading message or a fallback UI
   }
@@ -131,9 +144,12 @@ const SingleProduct = () => {
           <SecondHeader
             userId={userId}
             onClickJetztKaufen={handleJetztKaufenClick}
+            product_id={product_id}
+            version={version}
+            timeData={timeData}
           />
         </div>
-
+        {JSON.stringify(timeData)}
         <div className="uppersection">
           <div
             style={{

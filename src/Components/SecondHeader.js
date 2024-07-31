@@ -6,8 +6,17 @@ import { NavLink } from "react-router-dom";
 import { BsCartCheckFill } from "react-icons/bs";
 import products from "../data/product_data";
 import LOGO from "../assets/Logo_SOLACE.png";
+import { doc, setDoc, arrayUnion } from "@firebase/firestore";
+import { db } from "../services/firebase";
+import { time } from "echarts";
 
-const SecondHeader = ({ userId, onClickJetztKaufen, product_id, version }) => {
+const SecondHeader = ({
+  userId,
+  onClickJetztKaufen,
+  product_id,
+  version,
+  timeData,
+}) => {
   const [mode, setMode] = useState("null");
   const [productId, setProductId] = useState(null);
   const [product, setProduct] = useState(null);
@@ -16,21 +25,40 @@ const SecondHeader = ({ userId, onClickJetztKaufen, product_id, version }) => {
     const searchParams = new URLSearchParams(window.location.search);
     const modeParam = searchParams.get("mode");
     const productIdParam = searchParams.get("product_id");
-  
+
     setMode(modeParam);
     setProductId(productIdParam);
 
     if (productIdParam) {
-      const foundProduct = products.find((product) => product.id == productIdParam);
+      const foundProduct = products.find(
+        (product) => product.id == productIdParam
+      );
       setProduct(foundProduct);
     }
   }, []);
 
-  const handleClick = (str) => {
-    console.log("handleClick Jetzt Kaufen", str);
+  const handleClick = async (str) => {
+    console.log("handleClick Jetzt Kaufen", timeData);
     if (userId) {
       // Update the database
       onClickJetztKaufen(JSON.stringify(str) + " " + new Date());
+      if (timeData) {
+        const ref = doc(db, "users", userId);
+        const data = {
+          "Clicked More Information": arrayUnion(
+            product.product_name + " " + new Date()
+          ),
+          "Time Spent on Presentation Section": arrayUnion(timeData),
+        };
+
+
+        console.log("Second header data", data)
+        try {
+          await setDoc(ref, data, { merge: true });
+        } catch (err) {
+          console.log(err);
+        }
+      }
     }
   };
 
@@ -61,7 +89,9 @@ const SecondHeader = ({ userId, onClickJetztKaufen, product_id, version }) => {
 
       <div>
         <NavLink
-          onClick={() => handleClick(product ? product.product_name : "Product")}
+          onClick={() =>
+            handleClick(product ? product.product_name : "Product")
+          }
           to={`/thankyou?mode=${mode}&userId=${userId}&product_id=${product_id}&isV=${version}`}
           className="navbar-link-cart"
         >
