@@ -80,10 +80,8 @@ const SingleProduct = () => {
   useEffect(() => {
     const upperSectionDiv = document.querySelector(".uppersection");
     const singelProductPage = document.querySelector(".single-product-page");
-    const secondHeader = document.querySelector(".secondHeader");
 
     const handleMouseEnter = () => {
-      console.log("Entering")
       setUpperSectionStartTime(Date.now());
     };
 
@@ -111,17 +109,16 @@ const SingleProduct = () => {
     if (upperSectionDiv && mode != 1) {
       upperSectionDiv.addEventListener("mouseenter", handleMouseEnter);
       upperSectionDiv.addEventListener("mouseleave", handleMouseLeave);
-    } else if (upperSectionDiv && singelProductPage && mode == 1 && secondHeader) {
+    } else if (upperSectionDiv && singelProductPage && mode == 1) {
       upperSectionDiv.addEventListener("mouseenter", handleMouseEnter);
       singelProductPage.addEventListener("mouseenter", handleMouseLeave);
-      secondHeader.addEventListener("mouseenter", handleMouseLeave);
     }
 
     return () => {
       if (upperSectionDiv && mode != 1) {
         upperSectionDiv.removeEventListener("mouseenter", handleMouseEnter);
         upperSectionDiv.removeEventListener("mouseleave", handleMouseLeave);
-      } else if (upperSectionDiv && singelProductPage && mode == 1 && secondHeader) {
+      } else if (upperSectionDiv && singelProductPage && mode == 1) {
         upperSectionDiv.addEventListener("mouseenter", handleMouseEnter);
         singelProductPage.addEventListener("mouseenter", handleMouseLeave);
       }
