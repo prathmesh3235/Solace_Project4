@@ -13,20 +13,23 @@ const ProductDisplay = ({ product, userId, mode, timeData }) => {
   const handleClick = async () => {
     const ref = doc(db, "users", userId);
     const data = {
-      "Clicked More Information": arrayUnion(product.product_name + " " + new Date()),
+      "Clicked More Information": arrayUnion(
+        product.product_name + " " + new Date()
+      ),
       "Time Spent on Presentation Section": arrayUnion(timeData),
     };
-    try {
-      await setDoc(ref, data, { merge: true });
-    } catch (err) {
-      console.log(err);
-    }
-    
+    await setDoc(ref, data, { merge: true });
+
     const seenVersion = sessionStorage.getItem("productdetailsVersion");
     const productIdSecvence = sessionStorage.getItem("shuffledIDs");
-    let nextVersion = JSON.parse(seenVersion)[JSON.parse(productIdSecvence).indexOf(product.id)];
+    let nextVersion =
+      JSON.parse(seenVersion)[
+        JSON.parse(productIdSecvence).indexOf(product.id)
+      ];
 
-    navigate(`/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isV=${nextVersion}`);
+    navigate(
+      `/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isV=${nextVersion}`
+    );
   };
 
   useEffect(() => {
