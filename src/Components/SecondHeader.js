@@ -40,7 +40,7 @@ const SecondHeader = ({
     console.log("handleClick Jetzt Kaufen", timeData);
     if (userId) {
       // Update the database
-      onClickJetztKaufen(JSON.stringify(str) + " " + new Date());
+      
       if (timeData) {
         const ref = doc(db, "users", userId);
         const data = {
@@ -48,7 +48,7 @@ const SecondHeader = ({
             product.product_name + " " + new Date()
           ),
           "Time Spent on Presentation Section": arrayUnion(timeData),
-        };
+        }; 
 
 
         console.log("Second header data", data)
@@ -57,6 +57,8 @@ const SecondHeader = ({
         } catch (err) {
           console.log(err);
         }
+      } else {
+        onClickJetztKaufen(JSON.stringify(str) + " " + new Date());
       }
     }
   };
