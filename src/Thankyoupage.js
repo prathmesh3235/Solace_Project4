@@ -25,8 +25,12 @@ const Thankyoupage = () => {
       }
       timeSpentData[key] = sessionStorage.getItem(key);
     });
+
     timeSpentData.totalTimeSpentOnSingleProductPage = totalTimeSpentOnSingleProductPage;
-    timeSpentData.totalTimeSpentOnProductDetailsPage = totalTimeSpentOnProductDetailsPage;
+    
+    if (totalTimeSpentOnProductDetailsPage > 0) {
+      timeSpentData.totalTimeSpentOnProductDetailsPage = totalTimeSpentOnProductDetailsPage;
+    }
 
     try {
       setDoc(ref, timeSpentData, { merge: true });

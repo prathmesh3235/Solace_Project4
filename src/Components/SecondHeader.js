@@ -44,7 +44,7 @@ const SecondHeader = ({
       if (timeData) {
         const ref = doc(db, "users", userId);
         const data = {
-          "Clicked More Information": arrayUnion(
+          "Clicked Buy Now": arrayUnion(
             product.product_name + " " + new Date()
           ),
           "Time Spent on Presentation Section": arrayUnion(timeData),

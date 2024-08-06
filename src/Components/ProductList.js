@@ -55,7 +55,7 @@ function Cell({ shoe, image, userId }) {
   const handleClick = async () => {
     const ref = doc(db, "users", userId); // Firebase creates this automatically
     let data = {
-      "Clicked Weitere Details": arrayUnion(
+      "Clicked Shop Now": arrayUnion(
         shoe.product_name + " " + new Date()
       ),
     };
