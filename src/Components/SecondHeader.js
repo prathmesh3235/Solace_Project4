@@ -44,9 +44,9 @@ const SecondHeader = ({
       if (timeData) {
         const ref = doc(db, "users", userId);
         const data = {
-          "Clicked Buy Now": arrayUnion(
-            product.product_name + " " + new Date()
-          ),
+          // "Clicked Buy Now": arrayUnion(
+          //   product.product_name + " " + new Date()
+          // ),
           "Time Spent on Presentation Section": arrayUnion(timeData),
         }; 
 
@@ -57,9 +57,9 @@ const SecondHeader = ({
         } catch (err) {
           console.log(err);
         }
-      } else {
-        onClickJetztKaufen(JSON.stringify(str) + " " + new Date());
-      }
+      } 
+      onClickJetztKaufen(JSON.stringify(str) + " " + new Date());
+      
     }
   };
 

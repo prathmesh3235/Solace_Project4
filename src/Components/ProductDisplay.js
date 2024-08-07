@@ -11,12 +11,13 @@ const ProductDisplay = ({ product, userId, mode, timeData }) => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
+    console.log("Product", timeData)
     const ref = doc(db, "users", userId);
     const data = {
       "Clicked More Information": arrayUnion(
         product.product_name + " " + new Date()
       ),
-      "Time Spent on Presentation Section": arrayUnion(timeData),
+      "Time Spent on Presentation Section": arrayUnion(timeData.productName ? timeData : "Mobile view"),
     };
     await setDoc(ref, data, { merge: true });
 
