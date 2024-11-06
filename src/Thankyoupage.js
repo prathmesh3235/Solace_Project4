@@ -18,18 +18,22 @@ const Thankyoupage = () => {
     let totalTimeSpentOnProductDetailsPage = 0;
     Object.keys(sessionStorage).forEach((key) => {
       if (key.startsWith("timeSpentOnSingleProductPage")) {
-        totalTimeSpentOnSingleProductPage += parseFloat(sessionStorage.getItem(key)) || 0;
+        totalTimeSpentOnSingleProductPage +=
+          parseFloat(sessionStorage.getItem(key)) || 0;
       }
       if (key.startsWith("timeSpentOnProductDetailsPage")) {
-        totalTimeSpentOnProductDetailsPage += parseFloat(sessionStorage.getItem(key)) || 0;
+        totalTimeSpentOnProductDetailsPage +=
+          parseFloat(sessionStorage.getItem(key)) || 0;
       }
       timeSpentData[key] = sessionStorage.getItem(key);
     });
 
-    timeSpentData.totalTimeSpentOnSingleProductPage = totalTimeSpentOnSingleProductPage;
-    
+    timeSpentData.totalTimeSpentOnSingleProductPage =
+      totalTimeSpentOnSingleProductPage;
+
     if (totalTimeSpentOnProductDetailsPage > 0) {
-      timeSpentData.totalTimeSpentOnProductDetailsPage = totalTimeSpentOnProductDetailsPage;
+      timeSpentData.totalTimeSpentOnProductDetailsPage =
+        totalTimeSpentOnProductDetailsPage;
     }
 
     try {
@@ -51,25 +55,53 @@ const Thankyoupage = () => {
         <h2 className="tyh2">Thank You.</h2>
         <br />
         <div>
-          {version==="true" &&(mode === "2" || mode === "3") ? (
-            <h3 className="tyh4">
-              Now, 
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_290EXgz8nt7F2xo"> please follow this link to return to the survey.</a>
-            </h3>
-          ) : version==="true" && mode === "1" ? (
+          {version === "true" && mode === "1" ? (
             <h3 className="tyh4">
               Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_0HghB9tE9uvbVPg"> please follow this link to return to the survey.</a>
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_0HghB9tE9uvbVPg">
+                {" "}
+                please follow this link to return to the survey.
+              </a>
             </h3>
-          ): version==="false" && mode === "1" ? (
+          ) : version === "true" && mode === "2" ? (
             <h3 className="tyh4">
               Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6zAtTZKBKcrRcYC"> please follow this link to return to the survey.</a>
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_9u8rWhIK6RpqMBw">
+                {" "}
+                please follow this link to return to the survey.
+              </a>
             </h3>
-          ): version ==="false" && (mode==="2" || mode==="3")? (
+          ) : version === "true" && mode === "3" ? (
             <h3 className="tyh4">
               Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_7R4dg92AQTWaJOC"> please follow this link to return to the survey.</a>
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6zYE8efPUT2Wo4K">
+                {" "}
+                please follow this link to return to the survey.
+              </a>
+            </h3>
+          ) : version === "false" && mode === "1" ? (
+            <h3 className="tyh4">
+              Now,
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6zAtTZKBKcrRcYC">
+                {" "}
+                please follow this link to return to the survey.
+              </a>
+            </h3>
+          ) : version === "false" && mode === "2" ? (
+            <h3 className="tyh4">
+              Now,
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_4O3W8IDNGCx8WmG">
+                {" "}
+                please follow this link to return to the survey.
+              </a>
+            </h3>
+          ) : version === "false" && mode === "3" ? (
+            <h3 className="tyh4">
+              Now,
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_aUZMfDVxRznFbYW">
+                {" "}
+                please follow this link to return to the survey.
+              </a>
             </h3>
           ) : null}
         </div>
