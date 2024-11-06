@@ -58,23 +58,7 @@ const Thankyoupage = () => {
           {version === "true" && mode === "1" ? (
             <h3 className="tyh4">
               Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_0HghB9tE9uvbVPg">
-                {" "}
-                please follow this link to return to the survey.
-              </a>
-            </h3>
-          ) : version === "true" && mode === "2" ? (
-            <h3 className="tyh4">
-              Now,
               <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_9u8rWhIK6RpqMBw">
-                {" "}
-                please follow this link to return to the survey.
-              </a>
-            </h3>
-          ) : version === "true" && mode === "3" ? (
-            <h3 className="tyh4">
-              Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6zYE8efPUT2Wo4K">
                 {" "}
                 please follow this link to return to the survey.
               </a>
@@ -82,20 +66,20 @@ const Thankyoupage = () => {
           ) : version === "false" && mode === "1" ? (
             <h3 className="tyh4">
               Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6zAtTZKBKcrRcYC">
-                {" "}
-                please follow this link to return to the survey.
-              </a>
-            </h3>
-          ) : version === "false" && mode === "2" ? (
-            <h3 className="tyh4">
-              Now,
               <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_4O3W8IDNGCx8WmG">
                 {" "}
                 please follow this link to return to the survey.
               </a>
             </h3>
-          ) : version === "false" && mode === "3" ? (
+          ) : version === "true" && (mode === "2" || mode === "3") ? (
+            <h3 className="tyh4">
+              Now,
+              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6zYE8efPUT2Wo4K">
+                {" "}
+                please follow this link to return to the survey.
+              </a>
+            </h3>
+          ) : version === "false" && (mode === "2" || mode === "3") ? (
             <h3 className="tyh4">
               Now,
               <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_aUZMfDVxRznFbYW">
