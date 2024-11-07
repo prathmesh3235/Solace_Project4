@@ -1,6 +1,8 @@
+// Import necessary functions
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import { db } from "./services/firebase";
+import parseUserAgent from './services/deviceInfo';
 
 function Login({ handleLogin }) {
   const navigate = useNavigate();
@@ -23,7 +25,8 @@ function Login({ handleLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = e.target.title.value.trim();
-    
+    const userAgentData = parseUserAgent();  // Parses the current browser's user agent
+
     const validationError = validateUserId(userId);
     if (validationError) {
       alert(validationError);
@@ -35,11 +38,8 @@ function Login({ handleLogin }) {
     try {
       const userDoc = await getDoc(userRef);
       if (userDoc.exists()) {
-        alert(
-          "This ID already exists. Please enter your initials + house number (e.g., LD15)"
-        );
+        alert("This ID already exists. Please enter your initials + house number (e.g., LD15)");
       } else {
-        sessionStorage.removeItem("shuffledIDs");
         sessionStorage.setItem("productdetailsVersion", JSON.stringify(userId[userId.length - 1] % 2 == 0 ? [true,false,true,false, true] : [false, true, false, true, false]));
         const searchParams = new URLSearchParams(window.location.search);
         navigate(`/home?mode=${searchParams.get("mode")}&userId=${userId}`);
@@ -47,16 +47,17 @@ function Login({ handleLogin }) {
         const data = {
           userId: userId,
           mode: searchParams.get("mode"),
+          userAgent: userAgentData  // Sending parsed user agent data to Firestore
         };
 
         try {
           await setDoc(userRef, data);
         } catch (err) {
-          console.error(err);
+          console.error('Error writing document: ', err);
         }
       }
     } catch (err) {
-      console.error(err);
+      console.error('Error accessing Firestore: ', err);
     }
   };
 
