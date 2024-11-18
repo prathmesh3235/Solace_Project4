@@ -1,4 +1,3 @@
-// Import necessary functions
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import { db } from "./services/firebase";
@@ -40,7 +39,7 @@ function Login({ handleLogin }) {
       if (userDoc.exists()) {
         alert("This ID already exists. Please enter your initials + house number (e.g., LD15)");
       } else {
-        sessionStorage.setItem("productdetailsVersion", JSON.stringify(userId[userId.length - 1] % 2 == 0 ? [true,false,true,false, true] : [false, true, false, true, false]));
+        sessionStorage.setItem("productdetailsVersion", JSON.stringify([null, null, null, null, null]));
         const searchParams = new URLSearchParams(window.location.search);
         navigate(`/home?mode=${searchParams.get("mode")}&userId=${userId}`);
 

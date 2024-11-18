@@ -11,26 +11,32 @@ const ProductDisplay = ({ product, userId, mode, timeData }) => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    console.log("Product", timeData)
+    const productIdSequence = JSON.parse(sessionStorage.getItem("shuffledIDs"));
+    const shuffledIndex = productIdSequence.indexOf(product.id);
+  
+    // Retrieve or initialize the product details version array
+    let productDetailsVersion = JSON.parse(sessionStorage.getItem("productdetailsVersion")) || [];
+    let lastValue = sessionStorage.getItem("lastValue");
+    
+    // Determine if this is the first interaction and handle boolean conversion properly
+    lastValue = lastValue === null ? Math.random() < 0.5 : lastValue === 'true';
+
+    if (typeof productDetailsVersion[shuffledIndex] !== 'boolean') {
+      lastValue = !lastValue;
+      productDetailsVersion[shuffledIndex] = lastValue;
+      sessionStorage.setItem("productdetailsVersion", JSON.stringify(productDetailsVersion));
+      sessionStorage.setItem("lastValue", lastValue.toString());
+    }
+
+    console.log("Product", timeData);
     const ref = doc(db, "users", userId);
     const data = {
-      "Clicked More Information": arrayUnion(
-        product.product_name + " " + new Date()
-      ),
+      "Clicked More Information": arrayUnion(product.product_name + " " + new Date()),
       "Time Spent on Presentation Section": arrayUnion(timeData.productName ? timeData : "Mobile view"),
     };
     await setDoc(ref, data, { merge: true });
 
-    const seenVersion = sessionStorage.getItem("productdetailsVersion");
-    const productIdSecvence = sessionStorage.getItem("shuffledIDs");
-    let nextVersion =
-      JSON.parse(seenVersion)[
-        JSON.parse(productIdSecvence).indexOf(product.id)
-      ];
-
-    navigate(
-      `/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isV=${nextVersion}`
-    );
+    navigate(`/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isV=${productDetailsVersion[shuffledIndex]}`);
   };
 
   useEffect(() => {
