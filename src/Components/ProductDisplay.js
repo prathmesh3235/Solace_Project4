@@ -14,29 +14,40 @@ const ProductDisplay = ({ product, userId, mode, timeData }) => {
     const productIdSequence = JSON.parse(sessionStorage.getItem("shuffledIDs"));
     const shuffledIndex = productIdSequence.indexOf(product.id);
   
-    // Retrieve or initialize the product details version array
-    let productDetailsVersion = JSON.parse(sessionStorage.getItem("productdetailsVersion")) || [];
-    let lastValue = sessionStorage.getItem("lastValue");
+    // Get current versions array
+    let productDetailsVersion = JSON.parse(sessionStorage.getItem("productdetailsVersion"));
     
-    // Determine if this is the first interaction and handle boolean conversion properly
-    lastValue = lastValue === null ? Math.random() < 0.5 : lastValue === 'true';
-
-    if (typeof productDetailsVersion[shuffledIndex] !== 'boolean') {
-      lastValue = !lastValue;
-      productDetailsVersion[shuffledIndex] = lastValue;
+    // Track which products have been clicked in session storage
+    let clickedProducts = JSON.parse(sessionStorage.getItem("clickedProducts") || "[]");
+    
+    if (!clickedProducts.includes(shuffledIndex)) {
+      // Product hasn't been clicked before
+      if (clickedProducts.length === 0) {
+        // First ever click - keep the random initial value
+      } else {
+        // Not first click - set opposite of last clicked product
+        const lastClickedIndex = clickedProducts[clickedProducts.length - 1];
+        productDetailsVersion[shuffledIndex] = !productDetailsVersion[lastClickedIndex];
+      }
+      // Add to clicked products array
+      clickedProducts.push(shuffledIndex);
+      sessionStorage.setItem("clickedProducts", JSON.stringify(clickedProducts));
       sessionStorage.setItem("productdetailsVersion", JSON.stringify(productDetailsVersion));
-      sessionStorage.setItem("lastValue", lastValue.toString());
     }
-
-    console.log("Product", timeData);
+    // If product was already clicked, its version remains unchanged
+  
     const ref = doc(db, "users", userId);
-    const data = {
+    let data = {
       "Clicked More Information": arrayUnion(product.product_name + " " + new Date()),
       "Time Spent on Presentation Section": arrayUnion(timeData.productName ? timeData : "Mobile view"),
     };
-    await setDoc(ref, data, { merge: true });
-
-    navigate(`/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isV=${productDetailsVersion[shuffledIndex]}`);
+  
+    try {
+      await setDoc(ref, data, { merge: true });
+      navigate(`/product/moreinfo?mode=${mode}&product_id=${product.id}&userId=${userId}&isV=${productDetailsVersion[shuffledIndex]}`);
+    } catch (err) {
+      console.error("Error during navigation or data update:", err);
+    }
   };
 
   useEffect(() => {

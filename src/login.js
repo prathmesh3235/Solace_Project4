@@ -24,7 +24,7 @@ function Login({ handleLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = e.target.title.value.trim();
-    const userAgentData = parseUserAgent();  // Parses the current browser's user agent
+    const userAgentData = parseUserAgent();
 
     const validationError = validateUserId(userId);
     if (validationError) {
@@ -34,19 +34,24 @@ function Login({ handleLogin }) {
 
     sessionStorage.clear();
     const userRef = doc(db, "users", userId);
+    
     try {
       const userDoc = await getDoc(userRef);
       if (userDoc.exists()) {
         alert("This ID already exists. Please enter your initials + house number (e.g., LD15)");
       } else {
-        sessionStorage.setItem("productdetailsVersion", JSON.stringify([null, null, null, null, null]));
+        // Initialize randomly but will be updated based on click order
+        const productVersions = Array(5).fill(null).map(() => Math.random() < 0.5);
+        sessionStorage.setItem("productdetailsVersion", JSON.stringify(productVersions));
+        
         const searchParams = new URLSearchParams(window.location.search);
         navigate(`/home?mode=${searchParams.get("mode")}&userId=${userId}`);
 
         const data = {
           userId: userId,
           mode: searchParams.get("mode"),
-          userAgent: userAgentData  // Sending parsed user agent data to Firestore
+          userAgent: userAgentData,
+          initialProductVersions: productVersions
         };
 
         try {
