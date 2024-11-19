@@ -103,9 +103,10 @@ const MoreinfoPositive = () => {
           )}
         </h2>
         <p style={{ display: openFeaturesUV ? "block" : "none" }}>
-          The {product.product_name} impresses with the built-in UV protection
+          {/* The {product.product_name} impresses with the built-in UV protection
           filter &quot;UV1000&quot; in &quot;very strong&quot;. This guarantees
-          protection against solar radiation up to UV index 10+.
+          protection against solar radiation up to UV index 10+. */}
+          very strong
         </p>
         <hr />
 
@@ -130,9 +131,10 @@ const MoreinfoPositive = () => {
           )}
         </h2>
         <p style={{ display: openFeaturesPOL ? "block" : "none" }}>
-          Polarized sunglasses not only offer protection from harmful UV
+          {/* Polarized sunglasses not only offer protection from harmful UV
           radiation, they also reduce unpleasant reflections from sunlight. The{" "}
-          {product.product_name} is polarized in this version.
+          {product.product_name} is polarized in this version. */}
+          present
         </p>
         <hr />
         <h2>
@@ -156,8 +158,9 @@ const MoreinfoPositive = () => {
           )}
         </h2>
         <p style={{ display: openFeaturesZU ? "block" : "none" }}>
-          The frame of the {product.product_name} is made of high-quality metal,
-          which guarantees durability and robustness.
+          {/* The frame of the {product.product_name} is made of high-quality metal,
+          which guarantees durability and robustness. */}
+          metal
         </p>
         <hr />
         <h2>
@@ -181,10 +184,11 @@ const MoreinfoPositive = () => {
           )}
         </h2>
         <p style={{ display: openFeaturesSEH ? "block" : "none" }}>
-          The {product.product_name} is equipped with high-quality, hard-wearing
+          {/* The {product.product_name} is equipped with high-quality, hard-wearing
           lenses. We guarantee durability and a high level of protection against
           scratches. If required, the lenses can be adjusted for prescription at
-          no extra cost.
+          no extra cost. */}
+          premium
         </p>
         <hr />
       </div>

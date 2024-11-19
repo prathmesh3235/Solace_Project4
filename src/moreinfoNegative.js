@@ -108,8 +108,9 @@ const MoreinfoNegative = () => {
           )}
         </h2>
         <p style={{ display: openFeaturesUV ? "block" : "none" }}>
-          The {product.product_name} does not have a built-in UV protection
-          filter.
+          {/* The {product.product_name} does not have a built-in UV protection
+          filter. */}
+          not present
         </p>
         <hr />
 
@@ -134,9 +135,10 @@ const MoreinfoNegative = () => {
           )}
         </h2>
         <p style={{ display: openFeaturesPOL ? "block" : "none" }}>
-          Polarized sunglasses not only offer protection from harmful UV
+          {/* Polarized sunglasses not only offer protection from harmful UV
           radiation, they also reduce unpleasant reflections from sunlight. The{" "}
-          {product.product_name} is not polarized in this version.
+          {product.product_name} is not polarized in this version. */}
+          not present
         </p>
         <hr />
         <h2>
@@ -160,7 +162,8 @@ const MoreinfoNegative = () => {
           )}
         </h2>
         <p style={{ display: openFeaturesZU ? "block" : "none" }}>
-          The frame of the {product.product_name} is made of standard plastic.
+          {/* The frame of the {product.product_name} is made of standard plastic. */}
+         plastic
         </p>
         <hr />
         <h2>
@@ -184,9 +187,10 @@ const MoreinfoNegative = () => {
           )}
         </h2>
         <p style={{ display: openFeaturesSEH ? "block" : "none" }}>
-          The {product.product_name} is equipped with standard lenses. We do
+          {/* The {product.product_name} is equipped with standard lenses. We do
           not guarantee durability or protection against scratches. Prescription
-          adjustment is not possible.
+          adjustment is not possible. */}
+          standard
         </p>
         <hr />
       </div>
