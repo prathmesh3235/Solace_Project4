@@ -13,20 +13,7 @@ const ProductDisplay = ({ product, userId, mode, timeData }) => {
   const handleClick = async () => {
     const productIdSequence = JSON.parse(sessionStorage.getItem("shuffledIDs"));
     const shuffledIndex = productIdSequence.indexOf(product.id);
-  
-    // Retrieve or initialize the product details version array
-    let productDetailsVersion = JSON.parse(sessionStorage.getItem("productdetailsVersion")) || [];
-    let lastValue = sessionStorage.getItem("lastValue");
-    
-    // Determine if this is the first interaction and handle boolean conversion properly
-    lastValue = lastValue === null ? Math.random() < 0.5 : lastValue === 'true';
-
-    if (typeof productDetailsVersion[shuffledIndex] !== 'boolean') {
-      lastValue = !lastValue;
-      productDetailsVersion[shuffledIndex] = lastValue;
-      sessionStorage.setItem("productdetailsVersion", JSON.stringify(productDetailsVersion));
-      sessionStorage.setItem("lastValue", lastValue.toString());
-    }
+    const productDetailsVersion = JSON.parse(sessionStorage.getItem("productdetailsVersion")) || [];
 
     console.log("Product", timeData);
     const ref = doc(db, "users", userId);
@@ -99,7 +86,6 @@ const Wrapper = styled.section`
     text-align: center;
     font-weight: bold;
     text-decoration: underline;
-    // text-decoration-color: blue;
     text-decoration-thickness: 5px;
   }
 

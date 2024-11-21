@@ -13,6 +13,23 @@ function Cell({ shoe, image, userId }) {
   }, []);
 
   const handleClick = async () => {
+    const productIdSequence = JSON.parse(sessionStorage.getItem("shuffledIDs"));
+    const shuffledIndex = productIdSequence.indexOf(shoe.id);
+  
+    // Retrieve or initialize the product details version array
+    let productDetailsVersion = JSON.parse(sessionStorage.getItem("productdetailsVersion")) || [];
+    let lastValue = sessionStorage.getItem("lastValue");
+    
+    // Determine if this is the first interaction and handle boolean conversion properly
+    lastValue = lastValue === null ? Math.random() < 0.5 : lastValue === 'true';
+
+    if (typeof productDetailsVersion[shuffledIndex] !== 'boolean') {
+      lastValue = !lastValue;
+      productDetailsVersion[shuffledIndex] = lastValue;
+      sessionStorage.setItem("productdetailsVersion", JSON.stringify(productDetailsVersion));
+      sessionStorage.setItem("lastValue", lastValue.toString());
+    }
+
     const ref = doc(db, "users", userId);
     let data = {
       "Clicked Shop Now": arrayUnion(shoe.product_name + " " + new Date()),
@@ -23,7 +40,6 @@ function Cell({ shoe, image, userId }) {
       navigate(`/product?mode=${mode}&product_id=${shoe.id}&userId=${userId}`);
     } catch (err) {
       console.error("Error during navigation or data update:", err);
-      // Optionally display an error message to the user
     }
   };
 
