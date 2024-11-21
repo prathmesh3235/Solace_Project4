@@ -80,23 +80,112 @@ const MoreinfoPositive = () => {
       </div>
       <div id="top" className="moreinfopage">
         <hr />
-        <h1>Product Details</h1>
+        <h1>Product Details </h1>
         <hr />
-        <div className="feature-section">
-          <h2>{product.uv_tag}: <span className="feature-detail">very strong</span></h2>
-        </div>
+        <h2>
+        {product.uv_tag}: very strong{" "}
+          {openFeaturesUV ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesUV(!openFeaturesUV);
+                handleClick("UV-Filter");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesUV(!openFeaturesUV);
+                handleClick("UV-Filter");
+              }}
+            />
+          )}
+        </h2>
+        <p style={{ display: openFeaturesUV ? "block" : "none" }}>
+          The {product.product_name} impresses with the built-in UV protection
+          filter &quot;UV1000&quot; in &quot;very strong&quot;. This guarantees
+          protection against solar radiation up to UV index 10+.
+        </p>
         <hr />
-        <div className="feature-section">
-          <h2>{product.Polarisierung_tag}: <span className="feature-detail">present</span></h2>
-        </div>
+
+        <h2>
+        {product.Polarisierung_tag}: present{" "}
+          {openFeaturesPOL ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesPOL(!openFeaturesPOL);
+                handleClick("Polarisierung");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesPOL(!openFeaturesPOL);
+                handleClick("Polarisierung");
+              }}
+            />
+          )}
+        </h2>
+        <p style={{ display: openFeaturesPOL ? "block" : "none" }}>
+          Polarized sunglasses not only offer protection from harmful UV
+          radiation, they also reduce unpleasant reflections from sunlight. The{" "}
+          {product.product_name} is polarized in this version.
+        </p>
         <hr />
-        <div className="feature-section">
-          <h2>{product.Material}: <span className="feature-detail">metal</span></h2>
-        </div>
+        <h2>
+        {product.Material}: metal{" "}
+          {openFeaturesZU ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesZU(!openFeaturesZU);
+                handleClick("Material");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesZU(!openFeaturesZU);
+                handleClick("Material");
+              }}
+            />
+          )}
+        </h2>
+        <p style={{ display: openFeaturesZU ? "block" : "none" }}>
+          The frame of the {product.product_name} is made of high-quality metal,
+          which guarantees durability and robustness.
+        </p>
         <hr />
-        <div className="feature-section">
-          <h2>{product.Lenses}: <span className="feature-detail">premium</span></h2>
-        </div>
+        <h2>
+        {product.Lenses}: premium{" "}
+          {openFeaturesSEH ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesSEH(!openFeaturesSEH);
+                handleClick("Sehstärke");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesSEH(!openFeaturesSEH);
+                handleClick("Sehstärke");
+              }}
+            />
+          )}
+        </h2>
+        <p style={{ display: openFeaturesSEH ? "block" : "none" }}>
+          The {product.product_name} is equipped with high-quality, hard-wearing
+          lenses. We guarantee durability and a high level of protection against
+          scratches. If required, the lenses can be adjusted for prescription at
+          no extra cost.
+        </p>
         <hr />
       </div>
       <Footer />

@@ -85,23 +85,109 @@ const MoreinfoNegative = () => {
       </div>
       <div id="top" className="moreinfopage">
         <hr />
-        <h1>Product Details</h1>
+        <h1>Product Details </h1>
         <hr />
-        <div className="feature-section">
-          <h2>{product.uv_tag}: <span className="feature-detail">not present</span></h2>
-        </div>
+        <h2>
+          {product.uv_tag}: not present{" "}
+          {openFeaturesUV ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesUV(!openFeaturesUV);
+                handleClick("UV-Filter");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesUV(!openFeaturesUV);
+                handleClick("UV-Filter");
+              }}
+            />
+          )}
+        </h2>
+        <p style={{ display: openFeaturesUV ? "block" : "none" }}>
+          The {product.product_name} does not have a built-in UV protection
+          filter.
+        </p>
         <hr />
-        <div className="feature-section">
-          <h2>{product.Polarisierung_tag}: <span className="feature-detail">not present</span></h2>
-        </div>
+
+        <h2>
+          {product.Polarisierung_tag}: not present{" "}
+          {openFeaturesPOL ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesPOL(!openFeaturesPOL);
+                handleClick("Polarisierung");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesPOL(!openFeaturesPOL);
+                handleClick("Polarisierung");
+              }}
+            />
+          )}
+        </h2>
+        <p style={{ display: openFeaturesPOL ? "block" : "none" }}>
+          Polarized sunglasses not only offer protection from harmful UV
+          radiation, they also reduce unpleasant reflections from sunlight. The{" "}
+          {product.product_name} is not polarized in this version.
+        </p>
         <hr />
-        <div className="feature-section">
-          <h2>{product.Material}: <span className="feature-detail">plastic</span></h2>
-        </div>
+        <h2>
+          {product.Material}: plastic{" "}
+          {openFeaturesZU ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesZU(!openFeaturesZU);
+                handleClick("Material");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesZU(!openFeaturesZU);
+                handleClick("Material");
+              }}
+            />
+          )}
+        </h2>
+        <p style={{ display: openFeaturesZU ? "block" : "none" }}>
+          The frame of the {product.product_name} is made of standard plastic.
+        </p>
         <hr />
-        <div className="feature-section">
-          <h2>{product.Lenses}: <span className="feature-detail">standard</span></h2>
-        </div>
+        <h2>
+          {product.Lenses}: standard{" "}
+          {openFeaturesSEH ? (
+            <AiOutlineUp
+              size={25}
+              onClick={() => {
+                setOpenFeaturesSEH(!openFeaturesSEH);
+                handleClick("Sehstärke");
+              }}
+            />
+          ) : (
+            <AiOutlineDown
+              size={25}
+              onClick={() => {
+                setOpenFeaturesSEH(!openFeaturesSEH);
+                handleClick("Sehstärke");
+              }}
+            />
+          )}
+        </h2>
+        <p style={{ display: openFeaturesSEH ? "block" : "none" }}>
+          The {product.product_name} is equipped with standard lenses. We do
+          not guarantee durability or protection against scratches. Prescription
+          adjustment is not possible.
+        </p>
         <hr />
       </div>
       <Footer />
@@ -111,4 +197,3 @@ const MoreinfoNegative = () => {
 const Wrapper = styled.section``;
 
 export default MoreinfoNegative;
-
