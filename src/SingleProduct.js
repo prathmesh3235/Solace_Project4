@@ -96,14 +96,14 @@ const SingleProduct = () => {
         if (userId) {
           // const ref = doc(db, "users", userId);
           try {
-            console.log("I ma here", timeSpentInUpperSection + (Date.now() - upperSectionStartTime) / 1000)
+            console.log("checkpoint", timeSpentInUpperSection + (Date.now() - upperSectionStartTime) / 1000)
             // await setDoc(
             //   ref,
             //   { "Time Spent on Presentation Section": arrayUnion({ productName: product.product_name, timeSpentInUpperSection }) },
             //   { merge: true }
             // );
           } catch (err) {
-            console.log("Error saving time spent in upper section:", err);
+            
           }
         }
       }

@@ -46,6 +46,19 @@ const Thankyoupage = () => {
     }
   }, []);
 
+  const getSurveyLink = () => {
+    if (mode === "1" && version === "true") {
+      return "https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_9KqiwjwTldUzzTg";
+    } else if (mode === "1" && version === "false") {
+      return "https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6MapWG93aPGf6vk";
+    } else if (mode === "2" && version === "true") {
+      return "https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_8B9rcM6t3RSO3Fc";
+    } else if (mode === "2" && version === "false") {
+      return "https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_dbPKlLmNV1dv7AG";
+    }
+    return null;
+  };
+
   return (
     <div>
       <div className="thirdHeader">
@@ -55,36 +68,11 @@ const Thankyoupage = () => {
         <h2 className="tyh2">Thank You.</h2>
         <br />
         <div>
-          {version === "true" && mode === "1" ? (
+          {getSurveyLink() ? (
             <h3 className="tyh4">
               Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_9u8rWhIK6RpqMBw">
-                {" "}
-                please follow this link to return to the survey.
-              </a>
-            </h3>
-          ) : version === "false" && mode === "1" ? (
-            <h3 className="tyh4">
-              Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_4O3W8IDNGCx8WmG">
-                {" "}
-                please follow this link to return to the survey.
-              </a>
-            </h3>
-          ) : version === "true" && (mode === "2" || mode === "3") ? (
-            <h3 className="tyh4">
-              Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_6zYE8efPUT2Wo4K">
-                {" "}
-                please follow this link to return to the survey.
-              </a>
-            </h3>
-          ) : version === "false" && (mode === "2" || mode === "3") ? (
-            <h3 className="tyh4">
-              Now,
-              <a href="https://unikoelnwiso.eu.qualtrics.com/jfe/form/SV_aUZMfDVxRznFbYW">
-                {" "}
-                please follow this link to return to the survey.
+              <a href={getSurveyLink()}>
+                {" "}please follow this link to return to the survey.
               </a>
             </h3>
           ) : null}
